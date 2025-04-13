@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+  }
+  
+  :root {
+    --background: 255 249 243;
+    --primary: 255 126 95;
+    --primary-light: 255 158 136;
+    --booking-blue: 0 53 128;
+    --action-green: 0 166 153;
+    --highlight-yellow: 250 204 21;
+    --text-primary: 34 34 34;
+    --text-secondary: 85 85 85;
+    --icon-gray: 102 102 102;
+  }
+
+  .dark {
+    --background: 31 31 35;
+    --text-primary: 229 229 229;
+    --text-secondary: 156 163 175;
+  }
+
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    @apply bg-background text-text-primary font-sans;
+  }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
+  /* RTL specific adjustments */
+  [dir="rtl"] .rtl-flip {
+    transform: scaleX(-1);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto px-4;
+    max-width: 1200px;
+  }
+
+  .page-container {
+    @apply w-full max-w-screen-xl mx-auto px-4 md:px-6 py-6;
+  }
+  
+  .btn {
+    @apply rounded-lg font-medium transition-all duration-200 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-light px-4 py-2;
+  }
+
+  .btn-booking {
+    @apply bg-booking-blue text-white hover:bg-booking-blue/90 px-4 py-2;
+  }
+
+  .card {
+    @apply bg-white dark:bg-dark-background rounded-xl shadow-card transition-all duration-300
+    hover:shadow-hover;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center gap-1.5 p-2 text-sm text-icon-gray
+    hover:text-primary transition-colors duration-200;
+  }
+
+  .nav-bar {
+    @apply fixed bottom-0 w-full bg-white/80 dark:bg-dark-background/80
+    backdrop-blur-md border-t border-gray-100 dark:border-gray-800;
+  }
+
+  .story-item {
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .story-ring {
+    @apply p-0.5 rounded-full bg-gradient-to-tr from-primary via-highlight-yellow to-action-green;
+  }
+
+  .story-image {
+    @apply w-16 h-16 rounded-full border-2 border-white;
+  }
+
+  .recipe-info {
+    @apply flex items-center gap-2 text-sm text-text-secondary;
+  }
+
+  .rating {
+    @apply flex items-center gap-1 text-highlight-yellow;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .page-transition {
+    @apply transition-opacity duration-300;
+  }
+
+  .loading-skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded;
+  }
+}
