@@ -20,14 +20,6 @@ export default function NotFound() {
   
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen bg-white">
-      {/* כותרת עליונה */}
-      <div className="bg-[#FF6B6B] text-white px-4 py-3 flex justify-between items-center shadow-md">
-        <Link href="/" className="flex items-center">
-          <Logo size={40} variant="simple" showText={true} className="text-white" />
-        </Link>
-        <ThemeLanguageSettings className="text-white" />
-      </div>
-      
       {/* תוכן העמוד */}
       <div className="flex flex-col items-center justify-center flex-1 px-4 text-center">
         {/* איור של סיר ריק או כלי מטבח */}
@@ -68,7 +60,7 @@ export default function NotFound() {
         
         <div className="flex flex-col sm:flex-row gap-4">
           <Link 
-            href="/" 
+            href="/feed" 
             className="px-8 py-3 bg-[#FF6B6B] text-white rounded-full font-medium hover:bg-[#FF5252] transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-200 flex items-center justify-center"
           >
             <svg className="w-5 h-5 mr-2 rtl:mr-0 rtl:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

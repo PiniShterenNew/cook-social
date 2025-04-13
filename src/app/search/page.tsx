@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { useApp } from '@/context/AppContext';
 import Link from 'next/link';
 import Image from 'next/image';
-import ThemeLanguageSettings from '@/components/settings/ThemeLanguageSettings';
 
 // מוק של נתוני מתכונים - במציאות יגיעו מהשרת
 const mockRecipes = [
@@ -125,15 +124,7 @@ export default function SearchPage() {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen bg-white">
-      {/* כותרת עליונה */}
-      <div className="bg-[#FF6B6B] text-white p-4 sticky top-0 z-10">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">{t('search.title')}</h1>
-          <ThemeLanguageSettings className="text-white" />
-        </div>
-      </div>
-      
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen w-full bg-white">
       {/* תיבת חיפוש */}
       <div className="p-4 sticky top-16 z-10 bg-white shadow-sm">
         <div className="relative">
@@ -231,43 +222,6 @@ export default function SearchPage() {
             </button>
           </div>
         )}
-      </div>
-      
-      {/* תפריט תחתון - יכול להיות במרכיב נפרד */}
-      <div className="sticky bottom-0 bg-white border-t border-[#E0E0E0] p-3">
-        <div className="flex justify-around">
-          <Link href="/feed" className="flex flex-col items-center text-[#757575]">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-            </svg>
-            <span className="text-xs">{t('nav.home')}</span>
-          </Link>
-          <Link href="/search" className="flex flex-col items-center text-[#FF6B6B]">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <span className="text-xs">{t('nav.search')}</span>
-          </Link>
-          <Link href="/add" className="flex flex-col items-center text-[#757575]">
-            <div className="w-12 h-12 bg-[#FF6B6B] rounded-full flex items-center justify-center text-white -mt-5">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-              </svg>
-            </div>
-          </Link>
-          <Link href="/saved" className="flex flex-col items-center text-[#757575]">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
-            </svg>
-            <span className="text-xs">{t('nav.saved')}</span>
-          </Link>
-          <Link href="/profile" className="flex flex-col items-center text-[#757575]">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-            </svg>
-            <span className="text-xs">{t('nav.profile')}</span>
-          </Link>
-        </div>
       </div>
     </div>
   );

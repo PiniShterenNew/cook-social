@@ -7,9 +7,9 @@ import { UserProvider } from "@/context/UserContext";
 import { RecipesProvider } from "@/context/RecipesContext";
 import { SavedProvider } from "@/context/SavedContext";
 
-import Navigation from "../components/layout/Navigation";
-import Footer from "../components/layout/Footer";
-import Header from "../components/layout/Header";
+import DynamicNavigation from "../components/layout/DynamicNavigation";
+import DynamicHeader from "../components/layout/DynamicHeader";
+import DynamicFooter from "../components/layout/DynamicFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,12 +39,12 @@ export default function RootLayout({
             <RecipesProvider>
               <SavedProvider>
                 <div className="flex flex-col min-h-screen">
-                  <Header />
+                  <DynamicHeader />
                   <main className="flex-1 flex w-full">
                     {children}
                   </main>
-                  <Navigation />
-                  <Footer />
+                  <DynamicNavigation />
+                  <DynamicFooter />
                 </div>
               </SavedProvider>
             </RecipesProvider>
