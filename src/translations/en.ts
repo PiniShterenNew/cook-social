@@ -5,7 +5,7 @@ import { TranslationDictionary } from '@/lib/i18n';
  */
 export const enTranslations: TranslationDictionary = {
   // General
-  'app.name': 'Cooksy',
+  'app.name': 'Twist',
   'app.slogan': 'Your home for cooking - with inspiration, community and tools',
   'app.loading': 'Loading...',
   'app.network.error': 'Network connection issue',
@@ -25,6 +25,9 @@ export const enTranslations: TranslationDictionary = {
   'auth.login': 'Login',
   'auth.register': 'Register',
   'auth.phone': 'Phone Number',
+  'auth.phone.label': 'Phone Number',
+  'auth.phone.placeholder': '05X XXX XXXX',
+  'auth.phone.info': 'Your phone number will be used for login',
   'auth.email': 'Email',
   'auth.email.label': 'Email address',
   'auth.email.placeholder': 'your@email.com',

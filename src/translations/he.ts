@@ -6,7 +6,7 @@ import { TranslationDictionary } from '@/lib/i18n';
  */
 export const heTranslations: TranslationDictionary = {
   // General
-  'app.name': 'Cooksy',
+  'app.name': 'Twist',
   'app.slogan': 'הבית שלך לבישול – עם השראה, קהילה וכלים',
   'app.loading': 'טוען...',
   'app.network.error': 'בעיית חיבור לרשת',
@@ -26,6 +26,9 @@ export const heTranslations: TranslationDictionary = {
   'auth.login': 'התחברות',
   'auth.register': 'הרשמה',
   'auth.phone': 'מספר טלפון',
+  'auth.phone.label': 'מספר טלפון',
+  'auth.phone.placeholder': '05X XXX XXXX',
+  'auth.phone.info': 'המספר שלך ישמש להתחברות',
   'auth.email': 'אימייל',
   'auth.email.label': 'כתובת אימייל',
   'auth.email.placeholder': 'your@email.com',

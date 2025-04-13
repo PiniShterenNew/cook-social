@@ -27,7 +27,7 @@ const Footer = () => {
     return (
       <footer className="bg-white pt-2 pb-2 text-center">
         <p className="text-gray-500 text-sm">
-          {new Date().getFullYear()} Cooksy. {t('footer.rights')}
+          {new Date().getFullYear()} {t('app.name')}. {t('footer.rights')}
         </p>
       </footer>
     );
@@ -36,9 +36,9 @@ const Footer = () => {
   // On verification page, we show minimal footer with just the copyright
   if (isAuthVerifyPage) {
     return (
-      <footer className="bg-white pt-2 pb-2 text-center">
+      <footer className="bg-white pt-2 pb-2 text-center z-10">
         <p className="text-gray-500 text-sm">
-          {new Date().getFullYear()} Cooksy. {t('footer.rights')}
+          {new Date().getFullYear()} {t('app.name')}. {t('footer.rights')}
         </p>
       </footer>
     );
@@ -47,13 +47,13 @@ const Footer = () => {
   // For logged in users, show a simpler version without redundant links
   if (isLoggedIn && !isAuthPage) {
     return (
-      <footer className="bg-white pt-4 pb-4">
+      <footer className="bg-white pt-4 pb-4 z-10">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-between">
             {/* Copyright */}
             <div className="w-full text-center md:text-start mb-4 md:mb-0">
               <p className="text-gray-500 text-sm">
-                {new Date().getFullYear()} Cooksy. {t('footer.rights')}
+                {new Date().getFullYear()} {t('app.name')}. {t('footer.rights')}
               </p>
             </div>
             
@@ -86,7 +86,7 @@ const Footer = () => {
   // For login and welcome pages, show simplified footer
   if (isAuthPage) {
     return (
-      <footer className="bg-white pt-4 pb-4">
+      <footer className="bg-white pt-4 pb-4 z-10">
         <div className="container mx-auto px-4">
           {/* Social Media */}
           <div className="flex justify-center space-x-6 rtl:space-x-reverse mb-4">
@@ -126,7 +126,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="text-center">
             <p className="text-gray-500 text-sm">
-              {new Date().getFullYear()} Cooksy. {t('footer.rights')}
+              {new Date().getFullYear()} {t('app.name')}. {t('footer.rights')}
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="mt-8 border-t border-gray-200 pt-6 text-center">
           <p className="text-gray-500 text-sm">
-            {new Date().getFullYear()} Cooksy. {t('footer.rights')}
+            {new Date().getFullYear()} {t('app.name')}. {t('footer.rights')}
           </p>
         </div>
       </div>

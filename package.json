@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:generate": "drizzle-kit generate:sqlite --schema=./src/db/schema.ts --out=./src/db/migrations",
+    "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx ./src/db/migrate.ts",
     "db:studio": "drizzle-kit studio --port 3333"
   },
@@ -19,6 +19,7 @@
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.41.0",
     "framer-motion": "^12.6.5",
+    "fs": "^0.0.1-security",
     "lucide-react": "^0.487.0",
     "next": "15.3.0",
     "react": "^19.0.0",

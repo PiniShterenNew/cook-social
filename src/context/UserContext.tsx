@@ -1,8 +1,6 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { db, users, verificationCodes } from '@/db';
-import { eq, and } from 'drizzle-orm';
 import { v4 as uuidv4 } from 'uuid';
 
 // Define user type
@@ -74,32 +72,27 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     checkAuth();
   }, []);
 
-  // Login function - simulate API call
+  // Login function - use API route instead of direct DB access
   const login = async (phone: string) => {
     setIsLoading(true);
 
     try {
-      // יצירת קוד אימות חד-פעמי
-      const verificationCode = Math.floor(1000 + Math.random() * 9000).toString();
-
-      // חישוב זמן תפוגה (10 דקות מעכשיו)
-      const expiresAt = new Date();
-      expiresAt.setMinutes(expiresAt.getMinutes() + 10);
-
-      // שמירת הקוד במסד הנתונים
-      await db.insert(verificationCodes).values({
-        id: uuidv4(),
-        phone: phone,
-        code: verificationCode,
-        expiresAt: expiresAt.toISOString(),
-        used: false,
-        createdAt: new Date().toISOString(),
+      const response = await fetch('/api/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phone }),
       });
 
-      // בפרויקט אמיתי, כאן היית שולח SMS, אבל לצורך הדגמה אנחנו נשתמש בקוד "1234" ב-console
-      console.log('Verification code (for demo only):', verificationCode);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to send verification code');
+      }
 
-      return verificationCode;
+      // In a real app, this would trigger sending an SMS
+      // For demo purposes, the code is logged on the server
+      return "1234"; // Demo code for testing
     } catch (error) {
       console.error('Login error:', error);
       throw error;
@@ -108,58 +101,33 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  // Verify code function
+  // Verify code function - use API route
   const verifyCode = async (code: string, phone?: string, email?: string): Promise<boolean> => {
     setIsLoading(true);
 
     try {
-      // חיפוש קוד האימות במסד הנתונים
-      const codeQuery = phone
-        ? eq(verificationCodes.phone, phone)
-        : eq(verificationCodes.email, email || '');
-
-      const validCode = await db.query.verificationCodes.findFirst({
-        where: and(
-          codeQuery,
-          eq(verificationCodes.code, code),
-          eq(verificationCodes.used, false),
-        ),
+      const response = await fetch('/api/auth', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code, phone, email }),
       });
 
-      // בדיקה אם הקוד תקף
-      if (!validCode) {
-        throw new Error('Invalid or expired verification code');
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to verify code');
       }
 
-      // בדיקה אם הקוד פג תוקף
-      const now = new Date();
-      const expiresAt = new Date(validCode.expiresAt);
-      if (now > expiresAt) {
-        throw new Error('Verification code has expired');
+      const data = await response.json();
+      
+      if (data.user) {
+        // User exists, log them in
+        setUser(data.user);
+        return false; // Not a new user
       }
 
-      // סימון הקוד כשימוש
-      await db
-        .update(verificationCodes)
-        .set({ used: true })
-        .where(eq(verificationCodes.id, validCode.id));
-
-      // בדיקה אם המשתמש קיים
-      const existingUser = phone
-        ? await db.query.users.findFirst({
-          where: eq(users.phone, phone),
-        })
-        : await db.query.users.findFirst({
-          where: eq(users.email, email || ''),
-        });
-
-      if (existingUser) {
-        // משתמש קיים, מחזירים אותו
-        setUser(existingUser);
-        return false;
-      }
-
-      // משתמש חדש, מחזירים שצריך להשלים רישום
+      // New user, return true to indicate registration needed
       return true;
     } catch (error) {
       console.error('Verification error:', error);
@@ -169,52 +137,26 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
   };
 
-  // Register function
+  // Register function - use API route
   const register = async (userData: Partial<User>) => {
     setIsLoading(true);
 
     try {
-      // קבלת הטלפון מהאחסון הזמני
-      const phone = userData.phone || '';
-
-      // יצירת ID חדש
-      const userId = uuidv4();
-
-      // יצירת המשתמש במסד הנתונים
-      const now = new Date().toISOString();
-      await db.insert(users).values({
-        id: userId,
-        name: userData.name || 'משתמש חדש',
-        username: userData.username || `user${Date.now()}`,
-        phone,
-        email: userData.email || null,
-        profileImage: userData.profileImage || null,
-        bio: userData.bio || null,
-        createdAt: now,
-        updatedAt: now,
+      const response = await fetch('/api/auth', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
       });
 
-      // אם יש תחומי עניין, הוסף אותם
-      if (userData.interests && userData.interests.length > 0) {
-        const interestsToInsert = userData.interests.map(interest => ({
-          id: uuidv4(),
-          userId,
-          interest,
-        }));
-
-        await db.insert(userInterests).values(interestsToInsert);
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to register user');
       }
 
-      // קבל את המשתמש המלא
-      const newUser = await db.query.users.findFirst({
-        where: eq(users.id, userId),
-        with: {
-          interests: true,
-        },
-      });
-
-      // עדכן את המצב
-      setUser(newUser || null);
+      const data = await response.json();
+      setUser(data.user);
     } catch (error) {
       console.error('Registration error:', error);
       throw error;

@@ -40,7 +40,7 @@ export default function RootLayout({
               <SavedProvider>
                 <div className="flex flex-col min-h-screen">
                   <Header />
-                  <main className="flex-1 w-full">
+                  <main className="flex-1 flex w-full">
                     {children}
                   </main>
                   <Navigation />

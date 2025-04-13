@@ -147,23 +147,7 @@ export default function Home() {
 
   return (
     <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col items-center justify-center min-h-screen bg-white">
-      {/* Background image with gradient overlay */}
-      <motion.div 
-        className="absolute inset-0 z-0 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <div 
-          className="absolute inset-0 bg-cover bg-center" 
-          style={{ 
-            backgroundImage: `url('/images/food-background.jpg')`,
-            filter: 'blur(3px)',
-            transform: 'scale(1.1)' // Slightly scale up to ensure coverage despite blur
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#00000099] via-[#ffffff50] to-white"></div>
-      </motion.div>
+    
       
       <motion.div 
         className="flex flex-col items-center z-10"

@@ -199,16 +199,10 @@ export default function LoginPage() {
       setIsSubmitting(false);
     }
   };
-  
-  // Toggle login method
-  const toggleLoginMethod = () => {
-    setLoginMethod(prev => prev === 'phone' ? 'email' : 'phone');
-    setIsValid(false);
-    setGeneralError('');
-  };
+
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen bg-white">
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen w-full bg-white">
       {/* Status Bar Background */}
       <div className="h-[40px] bg-[#FF6B6B]"></div>
       
@@ -250,10 +244,6 @@ export default function LoginPage() {
       
       {/* Main Content with Padding */}
       <div className="flex flex-col flex-1 px-[30px] md:max-w-[500px] md:mx-auto md:w-full">
-        {/* Header with Back Button */}
-        <div className="mt-[20px] flex">
-          <BackButton />
-        </div>
         
         {/* Logo and App Info */}
         <motion.div

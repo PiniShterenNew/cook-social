@@ -7,7 +7,7 @@
     scroll-behavior: smooth;
     height: 100%;
   }
-  
+
   :root {
     --background: 255 249 243;
     --primary: 255 126 95;
@@ -45,7 +45,12 @@
     transform: scaleX(-1);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display;
   }
 }
@@ -59,7 +64,7 @@
   .page-container {
     @apply w-full max-w-screen-xl mx-auto px-4 md:px-6 py-6;
   }
-  
+
   .btn {
     @apply rounded-lg font-medium transition-all duration-200 active:scale-95;
   }
@@ -73,18 +78,15 @@
   }
 
   .card {
-    @apply bg-white dark:bg-dark-background rounded-xl shadow-card transition-all duration-300
-    hover:shadow-hover;
+    @apply bg-white dark:bg-dark-background rounded-xl shadow-card transition-all duration-300 hover:shadow-hover;
   }
 
   .nav-item {
-    @apply flex flex-col items-center gap-1.5 p-2 text-sm text-icon-gray
-    hover:text-primary transition-colors duration-200;
+    @apply flex flex-col items-center gap-1.5 p-2 text-sm text-icon-gray hover:text-primary transition-colors duration-200;
   }
 
   .nav-bar {
-    @apply fixed bottom-0 w-full bg-white/80 dark:bg-dark-background/80
-    backdrop-blur-md border-t border-gray-100 dark:border-gray-800;
+    @apply fixed bottom-0 w-full bg-white/80 dark:bg-dark-background/80 backdrop-blur-md border-t border-gray-100 dark:border-gray-800;
   }
 
   .story-item {
@@ -119,5 +121,15 @@
 
   .loading-skeleton {
     @apply animate-pulse bg-gray-200 dark:bg-gray-800 rounded;
+  }
+
+  /* ✅ הוספת המחלקות החסרות */
+  .shadow-card {
+    @apply shadow-md;
+    /* או כל רמת shadow שתרצה */
+  }
+
+  .shadow-hover {
+    @apply shadow-lg;
   }
 }

@@ -285,7 +285,7 @@ export default function VerificationPage() {
   };
 
   return (
-    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-screen bg-white">
+    <div dir={isRTL ? 'rtl' : 'ltr'} className="flex flex-col min-h-full bg-white w-full">
       {/* Status Bar Background */}
       <div className="h-[40px] bg-[#FF6B6B]"></div>
       
@@ -327,11 +327,6 @@ export default function VerificationPage() {
       
       {/* Main Content with Padding */}
       <div className="flex flex-col flex-1 px-[30px] md:max-w-[500px] md:mx-auto md:w-full">
-        {/* Header with Back Button */}
-        <div className="mt-[20px] flex">
-          <BackButton />
-        </div>
-        
         {/* Logo */}
         <motion.div
           className="flex justify-center mt-[40px] md:mt-[60px]"
